@@ -3,3 +3,21 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/. #}
 
 {% extends "firefox/releases/release-notes.html" %}
+
+{% block body_class %}fx-notes space{% endblock %}
+
+{% block site_header_logo %}
+  <h2>{{ high_res_img('firefox/template/header-logo-nightly.png', {'alt': _('Firefox Nightly'), 'width': '305', 'height': '70'}) }}</h2>
+{% endblock %}
+
+{% block notes_heading_primary %}
+  <h1>{{ _('See what landed recently in <span>Firefox Nightly</span>!') }}</h1>
+{% endblock %}
+
+{% block site_footer %}
+  {% if LANG.startswith('en-') %}
+    {% include 'includes/site-footer-new.html' %}
+  {% else %}
+    {% include 'includes/site-footer.html' %}
+  {% endif %}
+{% endblock %}
