@@ -18,7 +18,7 @@
 <main role="main">
   <header>
     <h1>{{_('Browse against the machine')}}</h1>
-    <p>{{_('Get Firefox, the only browser built for people, not profit.')}}</p>
+    {% block main_header_copy %}{% endblock %}
   </header>
   <div class="download-cta">
     {{ download_firefox(alt_copy=_('Download Firefox'), locale_in_transition=True, button_color='button-hollow') }}
