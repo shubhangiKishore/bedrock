@@ -80,7 +80,7 @@ Mozilla.TrafficCop.prototype.init = function() {
     var redirectUrl;
 
     // respect the DNT
-    if (typeof window._dntEnabled === 'function' && window._dntEnabled()) {
+    if (typeof Mozilla.dntEnabled === 'function' && Mozilla.dntEnabled()) {
         return;
     }
 
@@ -100,6 +100,15 @@ Mozilla.TrafficCop.prototype.init = function() {
             if (redirectUrl) {
                 // if we get a variation, send the user and store a cookie
                 if (redirectUrl !== Mozilla.TrafficCop.noVariationCookieValue) {
+                    // Store the original referrer for use after redirect takes place so analytics can
+                    // keep track of where visitors are coming from.
+
+                    // Traffic Cop does nothing with this referrer - it's up to the implementing site to
+                    // send it on to an analytics platform (or whatever).
+                    if (document.referrer !== '') {
+                        Mozilla.Cookies.setItem('mozilla-traffic-cop-original-referrer', document.referrer, this.cookieExpiresDate());
+                    }
+
                     Mozilla.Cookies.setItem(this.id, this.redirectVariation, this.cookieExpiresDate());
                     window.location.href = redirectUrl;
                 }
